@@ -58,7 +58,8 @@ def make_vocab(args, file_name, out_name):
                     vocab[wrd] = 1
                 else:
                     vocab[wrd] += 1
-    vocab = sorted(vocab.items(), key=lambda e: e[0], reverse=False)
+
+                    vocab = sorted(vocab.items(), key=lambda e: e[0], reverse=False)
     del vocab[0]
     for item in vocab:
         vocab_file.write(item[0] + ' ' + str(item[1]) + '\n')
@@ -67,13 +68,16 @@ def make_vocab(args, file_name, out_name):
 
 # 统计信息
 def statistic_info(args):
+
     dir_path = args.data_ori_dir
     data_file = open(dir_path + "shakespeare-merchant_nolabel", 'r', encoding='utf-8')
+
     vocab_file = open(dir_path + "vocab_ori.txt", 'r', encoding='utf-8')
     info_file = open(dir_path + "statistic_res.txt", 'w', encoding='utf-8')
     vocab = dict()
     doc_sum = 0
     doc_len = []
+
     term_sum = 0
     token_sum = 0
     for line in vocab_file:
@@ -101,6 +105,7 @@ def statistic_info(args):
     docsum_str = "文档数量:" + str(doc_sum)
     token_str = "词条数量:" + str(token_sum)
     ave_str = "文档平均长度:" + str(ave_doclen)
+    doclen_str = "文档长度:" + str(doc_len)
     print(term_str)
     print(docsum_str)
     print(token_str)
@@ -109,6 +114,7 @@ def statistic_info(args):
     info_file.write(docsum_str + '\n')
     info_file.write(token_str + '\n')
     info_file.write(ave_str + '\n')
+    info_file.write(doclen_str + '\n')
     data_file.close()
     vocab_file.close()
     info_file.close()
